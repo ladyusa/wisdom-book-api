@@ -8,7 +8,7 @@ import th.ac.ku.book.service.BookService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/books")
 public class BookRestController {
 
     @Autowired
