@@ -1,6 +1,11 @@
-FROM openjdk:17-jdk-slim
-COPY target/bookapi-1.0.0.jar bookapi.jar
-EXPOSE 9001
+FROM maven:3-eclipse-temurin-21 AS build
+COPY .. /wisdom-book-api/
+WORKDIR /wisdom-book-api
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:21
+COPY --from=build wisdom-book-api/target/bookapi-1.0.0.jar bookapi.jar
+EXPOSE 9090
 ENTRYPOINT ["java","-jar","/bookapi.jar"]
 
 # -------------------------------------
